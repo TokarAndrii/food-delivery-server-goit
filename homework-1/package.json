@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "url-pattern": "^1.0.3"
   }
 }

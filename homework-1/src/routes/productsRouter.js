@@ -1,7 +1,33 @@
 const queryString = require("query-string");
 const allProducts = require("../db/products/all-products.json");
+const url = require("url");
 const productsRouter = (request, response) => {
+  const parsedUrl = url.parse(request.url);
+
+  if (parsedUrl.query) {
+    const key = parsedUrl.query.split("=")[0];
+
+    if (key !== "ids") {
+      let value = parsedUrl.query.split("=")[1];
+      value = value.split("%")[1];
+
+      let valueSliced = value.match(/[A-Za-z]/g).join("");
+
+      const foundProductsByQuery = allProducts.filter(current =>
+        current.categories.includes(valueSliced)
+      );
+
+      response.writeHead(200, { "Content-Type": "application/json" });
+      response.write(
+        JSON.stringify({ status: "success", products: foundProductsByQuery })
+      );
+      response.end();
+      return;
+    }
+  }
+
   let parsedQS = queryString.parse(request.url);
+
   let val = Object.values(parsedQS).toString();
   if (val) {
     val = val.split(",");

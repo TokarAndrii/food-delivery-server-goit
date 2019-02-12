@@ -45,7 +45,7 @@
     "creatorId": 1,
     "created": "21-08-2018",
     "modified": "21-08-2018",
-    "categories": ["pizza"]
+    "categories": ["food"]
   },
   {
     "id": 19112835,
@@ -57,7 +57,7 @@
     "creatorId": 1,
     "created": "21-08-2018",
     "modified": "21-08-2018",
-    "categories": ["pizza"]
+    "categories": ["food"]
   },
   {
     "id": 19112836,
@@ -69,6 +69,6 @@
     "creatorId": 1,
     "created": "21-08-2018",
     "modified": "21-08-2018",
-    "categories": ["pizza"]
+    "categories": ["food"]
   }
 ]

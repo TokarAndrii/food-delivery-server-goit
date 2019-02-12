@@ -25,10 +25,14 @@ const startServer = port => {
     }
 
     switch (parsedUrl.pathname) {
+      //http://localhost:8082/products/
+      //http://localhost:8082/products/?ids='19112831, 19112832, 19112833'
+      //http://localhost:8082/products/?category="pizza"
       case "/products/":
         logger(request, response, () => productsRouter(request, response));
         break;
 
+      //http://localhost:8082/products/19112833
       case `/products/${id}`:
         logger(request, response, () => productsRouterId(request, response));
         break;

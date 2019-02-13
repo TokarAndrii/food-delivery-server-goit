@@ -1,5 +1,6 @@
-const http = require("http");
+const https = require("https");
 const url = require("url");
+const fs = require("fs")
 const morgan = require("morgan");
 const UrlPattern = require("url-pattern");
 
@@ -8,9 +9,15 @@ const productsRouter = require("../routes/productsRouter");
 const productsRouterId = require("../routes/productsRouterId");
 const signupRouter = require("../routes/signupRouter");
 
+
+var options = {
+  key: fs.readFileSync(__dirname + '../../../server.key'),
+  cert: fs.readFileSync(__dirname + '../../../server.crt')
+};
+
 const startServer = port => {
   const logger = morgan("combined");
-  const server = http.createServer((request, response) => {
+  const server = https.createServer(options, (request, response) => {
     const parsedUrl = url.parse(request.url);
 
     var pattern = new UrlPattern("/products(/:id)");
@@ -25,14 +32,14 @@ const startServer = port => {
     }
 
     switch (parsedUrl.pathname) {
-      //http://localhost:8082/products/
-      //http://localhost:8082/products/?ids='19112831, 19112832, 19112833'
-      //http://localhost:8082/products/?category="pizza"
+      //https://localhost:8082/products/
+      //https://localhost:8082/products/?ids='19112831, 19112832, 19112833'
+      //https://localhost:8082/products/?category="pizza"
       case "/products/":
         logger(request, response, () => productsRouter(request, response));
         break;
 
-      //http://localhost:8082/products/19112833
+      //https://localhost:8082/products/19112833
       case `/products/${id}`:
         logger(request, response, () => productsRouterId(request, response));
         break;

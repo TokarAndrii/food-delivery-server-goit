@@ -1,4 +1,4 @@
-const products = require('../../db/products/all-products.json')
+const products = require('../../../db/products/all-products.json')
 
 const productsRouter = (req, res) => {
     const { ids } = req.query;

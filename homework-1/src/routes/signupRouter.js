@@ -7,15 +7,16 @@ const signUpRouter = (request, response) => {
     let body = "";
     let name;
 
-    request.on("data", function(data) {
+    request.on("data", function (data) {
       body += data;
     });
 
-    request.on("end", function() {
+    request.on("end", function () {
       let userData = JSON.parse(body);
 
       const { username } = userData;
       name = username;
+
 
       fs.writeFile(
         path.join(__dirname, "../db/users/", `${username}.json`),
